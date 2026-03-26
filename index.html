@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Josue Mendes | BIM Specialist Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --white: #FFFFFF;
+            --off-white: #FAFAFA;
+            --light-gray: #F5F5F5;
+            --mid-gray: #E0E0E0;
+            --text-gray: #4A4A4A;
+            --text-dark: #2A2A2A;
+            --accent-green: #00C853;
+            --accent-blue: #2962FF;
+            --technical-grid: #EEEEEE;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--text-dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ============================================
+           COVER PAGE
+        ============================================ */
+        .cover {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, var(--white) 0%, var(--off-white) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 40%, rgba(0, 200, 83, 0.03) 50%, transparent 60%);
+            transform: rotate(-15deg);
+            pointer-events: none;
+        }
+
+        .cover-content {
+            text-align: center;
+            z-index: 2;
+        }
+
+        .cover-name {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .cover-title {
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            font-weight: 400;
+            color: var(--text-gray);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .cover-subtitle {
+            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+            font-weight: 300;
+            color: var(--text-gray);
+            margin-top: 2rem;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cover-subtitle span {
+            position: relative;
+        }
+
+        .cover-subtitle span::before {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--accent-green);
+        }
+
+        .certification-strip {
+            margin-top: 3rem;
+            padding: 1rem 0;
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .certification-strip span::before {
+            content: '→ ';
+            color: var(--accent-green);
+        }
+
+        /* ============================================
+           PROJECT PAGE LAYOUT
+        ============================================ */
+        .page {
+            min-height: 100vh;
+            padding: 4rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            page-break-after: always;
+        }
+
+        .project-header {
+            border-bottom: 1px solid var(--technical-grid);
+            padding-bottom: 2rem;
+            margin-bottom: 3rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .project-title-area h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .project-type {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 500;
+        }
+
+        .project-meta {
+            display: grid;
+            gap: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .meta-item {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 1rem;
+        }
+
+        .meta-label {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+        }
+
+        .meta-value {
+            color: var(--text-dark);
+            font-weight: 400;
+        }
+
+        /* ============================================
+           VISUAL GRID - 80% IMAGE DOMINANCE
+        ============================================ */
+        .visual-grid-hero {
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 60vh;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .placeholder-text {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--mid-gray);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        .visual-grid-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .visual-grid-triple {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .grid-item {
+            background: var(--light-gray);
+            aspect-ratio: 4/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .grid-caption {
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            margin-top: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* ============================================
+           TECHNICAL METRICS SECTION
+        ============================================ */
+        .metrics-section {
+            background: var(--off-white);
+            border-left: 3px solid var(--accent-green);
+            padding: 2rem;
+            margin: 3rem 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .metric {
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--accent-green);
+            margin-bottom: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* ============================================
+           TEXT SECTION - MINIMAL 20%
+        ============================================ */
+        .text-section {
+            max-width: 800px;
+            margin: 2rem 0;
+            line-height: 1.8;
+            font-size: 0.95rem;
+            color: var(--text-gray);
+        }
+
+        .text-section h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+        }
+
+        .text-section p {
+            margin-bottom: 1rem;
+        }
+
+        .tools-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .tool-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            padding: 0.4rem 1rem;
+            background: var(--white);
+            border: 1px solid var(--mid-gray);
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.2s ease;
+        }
+
+        .tool-tag:hover {
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        /* ============================================
+           CONTACT PAGE
+        ============================================ */
+        .contact-page {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: var(--off-white);
+        }
+
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .contact-content h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+        }
+
+        .contact-items {
+            display: grid;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .contact-item a {
+            color: var(--accent-green);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .contact-item a:hover {
+            opacity: 0.7;
+        }
+
+        /* ============================================
+           PRINT STYLES
+        ============================================ */
+        @media print {
+            .page {
+                page-break-after: always;
+                padding: 3rem 2rem;
+            }
+            
+            .cover {
+                page-break-after: always;
+            }
+        }
+
+        /* ============================================
+           RESPONSIVE
+        ============================================ */
+        @media (max-width: 768px) {
+            .project-header {
+                grid-template-columns: 1fr;
+            }
+
+            .visual-grid-split,
+            .visual-grid-triple {
+                grid-template-columns: 1fr;
+            }
+
+            .metrics-section {
+                grid-template-columns: 1fr;
+            }
+
+            .page {
+                padding: 3rem 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+         COVER PAGE
+    ============================================ -->
+    <div class="cover">
+        <div class="cover-content">
+            <h1 class="cover-name">JOSUE MENDES</h1>
+            <p class="cover-title">BIM SPECIALIST / DIPLOM-ARCHITEKT</p>
+            <div class="cover-subtitle">
+                <span>Munich</span>
+                <span>Germany</span>
+                <span>6+ Years Experience</span>
+            </div>
+            <div class="certification-strip">
+                <span>buildingSMART OpenBIM</span>
+                <span>ISO 19650</span>
+                <span>Graphisoft BIM Coordinator</span>
+                <span>LEED AP</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         PROJECT 1: GRAN SABANA FIELD STATION
+    ============================================ -->
+    <div class="page">
+        <div class="project-header">
+            <div class="project-title-area">
+                <p class="project-type">Research Infrastructure</p>
+                <h2>Gran Sabana Field Station</h2>
+            </div>
+            <div class="project-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Location</span>
+                    <span class="meta-value">Canaima, Venezuela</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Year</span>
+                    <span class="meta-value">2024</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Role</span>
+                    <span class="meta-value">BIM Lead, Parametric Design</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Software</span>
+                    <span class="meta-value">Revit, Dynamo, Grasshopper</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- HERO IMAGE -->
+        <div class="visual-grid-hero">
+            <div class="hero-image">
+                <span class="placeholder-text">→ Axonometric Exploded View / 1920x1080px</span>
+            </div>
+        </div>
+
+        <!-- TECHNICAL METRICS -->
+        <div class="metrics-section">
+            <div class="metric">
+                <div class="metric-value">40%</div>
+                <div class="metric-label">Faster Modeling</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">850m²</div>
+                <div class="metric-label">Built Area</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">12</div>
+                <div class="metric-label">Parametric Families</div>
+            </div>
+        </div>
+
+        <!-- SPLIT GRID -->
+        <div class="visual-grid-split">
+            <div>
+                <div class="grid-item">
+                    <span class="placeholder-text">→ Floor Plan / Technical</span>
+                </div>
+                <p class="grid-caption">Ground Floor Plan 1:100</p>
+            </div>
+            <div>
+                <div class="grid-item">
+                    <span class="placeholder-text">→ Section Cut / Technical</span>
+                </div>
+                <p class="grid-caption">Longitudinal Section 1:100</p>
+            </div>
+        </div>
+
+        <!-- MINIMAL TEXT -->
+        <div class="text-section">
+            <h3>Project Overview</h3>
+            <p>Parametric facade system optimized for Gran Sabana's extreme climate. BIM workflow integrated indigenous territorial knowledge with technical specifications. Custom Dynamo scripts automated facade pattern generation, reducing modeling time by 40%.</p>
+            
+            <div class="tools-list">
+                <span class="tool-tag">Revit 2024</span>
+                <span class="tool-tag">Dynamo</span>
+                <span class="tool-tag">Twinmotion</span>
+                <span class="tool-tag">Navisworks</span>
+            </div>
+        </div>
+
+        <!-- TRIPLE GRID -->
+        <div class="visual-grid-triple">
+            <div>
+                <div class="grid-item">
+                    <span class="placeholder-text">→ Detail 01</span>
+                </div>
+                <p class="grid-caption">Facade Connection Detail</p>
+            </div>
+            <div>
+                <div class="grid-item">
+                    <span class="placeholder-text">→ Detail 02</span>
+                </div>
+                <p class="grid-caption">Foundation System</p>
+            </div>
+            <div>
+                <div class="grid-item">
+                    <span class="placeholder-text">→ Render</span>
+                </div>
+                <p class="grid-caption">Exterior Render / Twinmotion</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         PROJECT 2: RESIDENZQUARTIER SCHWABING
+    ============================================ -->
+    <div class="page">
+        <div class="project-header">
+            <div class="project-title-area">
+                <p class="project-type">Residential / Coordination</p>
+                <h2>Residenzquartier Schwabing</h2>
+            </div>
+            <div class="project-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Location</span>
+                    <span class="meta-value">Munich, Germany</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Year</span>
+                    <span class="meta-value">2023-2024</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Value</span>
+                    <span class="meta-value">€12M</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Role</span>
+                    <span class="meta-value">BIM Coordinator</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- HERO IMAGE -->
+        <div class="visual-grid-hero">
+            <div class="hero-image">
+                <span class="placeholder-text">→ Clash Detection Report / Before & After</span>
+            </div>
+        </div>
+
+        <!-- TECHNICAL METRICS -->
+        <div class="metrics-section">
+            <div class="metric">
+                <div class="metric-value">340→18</div>
+                <div class="metric-label">Clashes Resolved</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">3 Weeks</div>
+                <div class="metric-label">Saved in Rework</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">ISO 19650</div>
+                <div class="metric-label">Compliance</div>
+            </div>
+        </div>
+
+        <!-- SPLIT GRID -->
+        <div class="visual-grid-split">
+            <div>
+                <div class="grid-item">
+                    <span class="placeholder-text">→ Coordination Drawing</span>
+                </div>
+                <p class="grid-caption">MEP Coordination / 3rd Floor</p>
+            </div>
+            <div>
+                <div class="grid-item">
+                    <span class="placeholder-text">→ Navisworks Clash View</span>
+                </div>
+                <p class="grid-caption">Critical Clash Zone / Resolved</p>
+            </div>
+        </div>
+
+        <!-- MINIMAL TEXT -->
+        <div class="text-section">
+            <h3>Coordination Challenge</h3>
+            <p>€12M residential project with complex MEP systems. Initial clash report identified 340 conflicts between architectural, structural, and MEP disciplines. Implemented rigorous BIM coordination workflow following ISO 19650 standards, reducing clashes to 18 before construction phase. Saved approximately 3 weeks of on-site rework and €50,000 in potential delays.</p>
+            
+            <div class="tools-list">
+                <span class="tool-tag">Revit Architecture</span>
+                <span class="tool-tag">Navisworks Manage</span>
+                <span class="tool-tag">BIM 360</span>
+                <span class="tool-tag">ISO 19650</span>
+            </div>
+        </div>
+
+        <!-- TRIPLE GRID -->
+        <div class="visual-grid-triple">
+            <div>
+                <div class="grid-item">
+                    <span class="placeholder-text">→ Floor Plan</span>
+                </div>
+                <p class="grid-caption">Typical Floor / 1:50</p>
+            </div>
+            <div>
+                <div class="grid-item">
+                    <span class="placeholder-text">→ Section</span>
+                </div>
+                <p class="grid-caption">Building Section / 1:50</p>
+            </div>
+            <div>
+                <div class="grid-item">
+                    <span class="placeholder-text">→ 3D View</span>
+                </div>
+                <p class="grid-caption">BIM Model / LOD 350</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         PROJECT 3: HEALTHCARE HUB BOGOTÁ
+    ============================================ -->
+    <div class="page">
+        <div class="project-header">
+            <div class="project-title-area">
+                <p class="project-type">Healthcare / MEP Coordination</p>
+                <h2>Healthcare Hub Bogotá</h2>
+            </div>
+            <div class="project-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Location</span>
+                    <span class="meta-value">Bogotá, Colombia</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Year</span>
+                    <span class="meta-value">2023</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Area</span>
+                    <span class="meta-value">4,200m²</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Role</span>
+                    <span class="meta-value">BIM Specialist / MEP Coordination</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- HERO IMAGE -->
+        <div class="visual-grid-hero">
+            <div class="hero-image">
+                <span class="placeholder-text">→ MEP Systems 3D Model / Isolated View</span>
+            </div>
+        </div>
+
+        <!-- TECHNICAL METRICS -->
+        <div class="metrics-section">
+            <div class="metric">
+                <div class="metric-value">25</div>
+                <div class="metric-label">Custom Families</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">LOD 400</div>
+                <div class="metric-label">Detail Level</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">100%</div>
+                <div class="metric-label">Code Compliance</div>
+            </div>
+        </div>
+
+        <!-- SPLIT GRID -->
+        <div class="visual-grid-split">
+            <div>
+                <div class="grid-item">
+                    <span class="placeholder-text">→ MEP Plan</span>
+                </div>
+                <p class="grid-caption">HVAC Distribution / Level 2</p>
+            </div>
+            <div>
+                <div class="grid-item">
+                    <span class="placeholder-text">→ Parametric Family</span>
+                </div>
+                <p class="grid-caption">Custom Medical Gas System</p>
+            </div>
+        </div>
+
+        <!-- MINIMAL TEXT -->
+        <div class="text-section">
+            <h3>Technical Approach</h3>
+            <p>Specialized healthcare facility requiring precise MEP coordination for medical gas systems, specialized HVAC, and critical power infrastructure. Developed 25 custom parametric families for healthcare-specific equipment. Achieved LOD 400 for fabrication-ready documentation. Full compliance with Colombian healthcare building codes.</p>
+            
+            <div class="tools-list">
+                <span class="tool-tag">Revit MEP</span>
+                <span class="tool-tag">Navisworks</span>
+                <span class="tool-tag">Family Editor</span>
+                <span class="tool-tag">BIM Collab</span>
+            </div>
+        </div>
+
+        <!-- TRIPLE GRID -->
+        <div class="visual-grid-triple">
+            <div>
+                <div class="grid-item">
+                    <span class="placeholder-text">→ System Diagram</span>
+                </div>
+                <p class="grid-caption">Medical Gas Distribution</p>
+            </div>
+            <div>
+                <div class="grid-item">
+                    <span class="placeholder-text">→ 3D Section</span>
+                </div>
+                <p class="grid-caption">Surgical Suite / MEP Systems</p>
+            </div>
+            <div>
+                <div class="grid-item">
+                    <span class="placeholder-text">→ Coordination</span>
+                </div>
+                <p class="grid-caption">Clash-Free Zone Verification</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         CONTACT PAGE
+    ============================================ -->
+    <div class="contact-page">
+        <div class="contact-content">
+            <h2>Let's Connect</h2>
+            <div class="contact-items">
+                <div class="contact-item">
+                    <span>Email:</span>
+                    <a href="/cdn-cgi/l/email-protection#abd2c4ded985cec6cac2c7ebced3cac6dbc7ce85c8c4c6"><span class="__cf_email__" data-cfemail="f38a9c8681dd969e929a9fb3968b929e839f96dd909c9e">[email&#160;protected]</span></a>
+                </div>
+                <div class="contact-item">
+                    <span>LinkedIn:</span>
+                    <a href="#">linkedin.com/in/yourprofile</a>
+                </div>
+                <div class="contact-item">
+                    <span>Location:<
