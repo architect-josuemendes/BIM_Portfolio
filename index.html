@@ -1,11 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Josue Mendes | BIM Specialist Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Josue Mendes | Architecture & BIM Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         * {
@@ -18,761 +17,1587 @@
             --white: #FFFFFF;
             --off-white: #FAFAFA;
             --light-gray: #F5F5F5;
-            --mid-gray: #E0E0E0;
-            --text-gray: #4A4A4A;
             --text-dark: #2A2A2A;
+            --text-gray: #4A4A4A;
+            --mid-gray: #E0E0E0;
             --accent-green: #00C853;
-            --accent-blue: #2962FF;
-            --technical-grid: #EEEEEE;
         }
 
         body {
-            font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'IBM Plex Sans', sans-serif;
             background: var(--white);
             color: var(--text-dark);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
-        /* ============================================
-           COVER PAGE
-        ============================================ */
-        .cover {
+        /* HERO SECTION */
+        .hero {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, var(--white) 0%, var(--off-white) 100%);
             position: relative;
-            overflow: hidden;
+            background: linear-gradient(135deg, var(--white) 0%, var(--off-white) 100%);
         }
 
-        .cover::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 80%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent 40%, rgba(0, 200, 83, 0.03) 50%, transparent 60%);
-            transform: rotate(-15deg);
-            pointer-events: none;
-        }
-
-        .cover-content {
-            text-align: center;
-            z-index: 2;
-        }
-
-        .cover-name {
-            font-size: clamp(3rem, 8vw, 5.5rem);
+        .hero-name {
+            font-size: clamp(4rem, 10vw, 7rem);
             font-weight: 300;
             letter-spacing: -0.02em;
             margin-bottom: 1rem;
-            color: var(--text-dark);
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
         }
 
-        .cover-title {
+        .hero-title {
             font-size: clamp(1.2rem, 2.5vw, 1.8rem);
             font-weight: 400;
             color: var(--text-gray);
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.05em;
-        }
-
-        .cover-subtitle {
-            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-            font-weight: 300;
-            color: var(--text-gray);
-            margin-top: 2rem;
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .cover-subtitle span {
-            position: relative;
-        }
-
-        .cover-subtitle span::before {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: var(--accent-green);
-        }
-
-        .certification-strip {
-            margin-top: 3rem;
-            padding: 1rem 0;
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--text-gray);
-            text-transform: uppercase;
             letter-spacing: 0.1em;
-        }
-
-        .certification-strip span::before {
-            content: '→ ';
-            color: var(--accent-green);
-        }
-
-        /* ============================================
-           PROJECT PAGE LAYOUT
-        ============================================ */
-        .page {
-            min-height: 100vh;
-            padding: 4rem 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-            page-break-after: always;
-        }
-
-        .project-header {
-            border-bottom: 1px solid var(--technical-grid);
-            padding-bottom: 2rem;
+            text-transform: uppercase;
             margin-bottom: 3rem;
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 3rem;
-            align-items: start;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.3s forwards;
         }
 
-        .project-title-area h2 {
-            font-size: clamp(2rem, 4vw, 3rem);
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.6s forwards, bounce 2s ease infinite;
+        }
+
+        .scroll-indicator::before {
+            content: '';
+            display: block;
+            width: 2px;
+            height: 50px;
+            background: var(--accent-green);
+            margin: 0 auto 10px;
+        }
+
+        .scroll-indicator::after {
+            content: 'SCROLL';
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: var(--text-gray);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* SECTION HEADERS */
+        .section {
+            min-height: 100vh;
+            padding: 5rem 5%;
+            background: var(--white);
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
             font-weight: 300;
             letter-spacing: -0.01em;
             margin-bottom: 0.5rem;
-            color: var(--text-dark);
         }
 
-        .project-type {
+        .section-subtitle {
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.9rem;
             color: var(--text-gray);
             text-transform: uppercase;
             letter-spacing: 0.15em;
-            font-weight: 500;
         }
 
-        .project-meta {
+        /* PROJECTS GRID */
+        .projects-grid {
             display: grid;
-            gap: 1rem;
-            font-size: 0.85rem;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            max-width: 1600px;
+            margin: 0 auto;
         }
 
-        .meta-item {
-            display: grid;
-            grid-template-columns: 100px 1fr;
-            gap: 1rem;
+        .project-card {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            background: var(--white);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .meta-label {
-            font-family: 'JetBrains Mono', monospace;
-            color: var(--text-gray);
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 0.1em;
+        .project-card:hover {
+            transform: translateY(-10px);
         }
 
-        .meta-value {
+        .project-icon {
+            width: 100%;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light-gray);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .project-card:hover .project-icon {
+            background: var(--accent-green);
+        }
+
+        .icon-shape {
+            font-size: 8rem;
+            font-weight: 600;
             color: var(--text-dark);
-            font-weight: 400;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* ============================================
-           VISUAL GRID - 80% IMAGE DOMINANCE
-        ============================================ */
-        .visual-grid-hero {
-            width: 100%;
-            margin-bottom: 2rem;
+        .project-card:hover .icon-shape {
+            color: var(--white);
+            transform: scale(1.1) rotate(5deg);
         }
 
-        .hero-image {
-            width: 100%;
-            height: 60vh;
-            background: var(--light-gray);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .placeholder-text {
+        .project-number {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
             font-family: 'JetBrains Mono', monospace;
-            color: var(--mid-gray);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-        }
-
-        .visual-grid-split {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .visual-grid-triple {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .grid-item {
-            background: var(--light-gray);
-            aspect-ratio: 4/3;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .grid-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .grid-caption {
-            font-size: 0.75rem;
+            font-size: 0.9rem;
             color: var(--text-gray);
-            margin-top: 0.5rem;
-            font-family: 'JetBrains Mono', monospace;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.1em;
+            transition: color 0.6s;
         }
 
-        /* ============================================
-           TECHNICAL METRICS SECTION
-        ============================================ */
-        .metrics-section {
-            background: var(--off-white);
-            border-left: 3px solid var(--accent-green);
+        .project-card:hover .project-number {
+            color: var(--white);
+        }
+
+        .project-info {
             padding: 2rem;
-            margin: 3rem 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
+            background: var(--white);
         }
 
-        .metric {
-            text-align: center;
-        }
-
-        .metric-value {
-            font-size: 2.5rem;
-            font-weight: 300;
-            color: var(--accent-green);
-            margin-bottom: 0.5rem;
+        .project-category {
             font-family: 'JetBrains Mono', monospace;
-        }
-
-        .metric-label {
-            font-size: 0.8rem;
-            color: var(--text-gray);
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        /* ============================================
-           TEXT SECTION - MINIMAL 20%
-        ============================================ */
-        .text-section {
-            max-width: 800px;
-            margin: 2rem 0;
-            line-height: 1.8;
-            font-size: 0.95rem;
+            letter-spacing: 0.15em;
             color: var(--text-gray);
+            margin-bottom: 0.5rem;
         }
 
-        .text-section h3 {
-            font-size: 1.2rem;
+        .project-name {
+            font-size: 1.8rem;
             font-weight: 500;
-            color: var(--text-dark);
             margin-bottom: 1rem;
             letter-spacing: -0.01em;
         }
 
-        .text-section p {
+        .project-location {
+            font-size: 0.9rem;
+            color: var(--text-gray);
             margin-bottom: 1rem;
         }
 
-        .tools-list {
+        .project-metrics {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .metric {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .metric-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--accent-green);
+        }
+
+        .metric-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-gray);
+            margin-top: 0.25rem;
+        }
+
+        /* PROJECT DETAIL OVERLAY */
+        .project-detail {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            z-index: 1000;
+            overflow-y: auto;
+            animation: slideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .project-detail.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-button {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--text-dark);
+            color: var(--white);
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            z-index: 1001;
+            transition: all 0.3s;
+        }
+
+        .close-button:hover {
+            background: var(--accent-green);
+            transform: rotate(90deg);
+        }
+
+        .detail-content {
+            padding: 8rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* PROJECT BOARD STYLES */
+        .project-board {
+            margin-top: 3rem;
+            padding: 3rem;
+            background: var(--off-white);
+            border-radius: 4px;
+        }
+
+        .board-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .meta-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .meta-value {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .board-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .board-metric {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--white);
+            border-radius: 4px;
+        }
+
+        .board-metric-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--accent-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .board-metric-label {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .board-tools {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1.5rem;
+            gap: 0.75rem;
+            margin-top: 2rem;
         }
 
         .tool-tag {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.75rem;
-            padding: 0.4rem 1rem;
+            padding: 0.5rem 1rem;
             background: var(--white);
-            border: 1px solid var(--mid-gray);
-            color: var(--text-gray);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            transition: all 0.2s ease;
-        }
-
-        .tool-tag:hover {
-            border-color: var(--accent-green);
-            color: var(--accent-green);
-        }
-
-        /* ============================================
-           CONTACT PAGE
-        ============================================ */
-        .contact-page {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: var(--off-white);
-        }
-
-        .contact-content {
-            text-align: center;
-            max-width: 600px;
-        }
-
-        .contact-content h2 {
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 2rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 2px;
             color: var(--text-dark);
         }
 
-        .contact-items {
-            display: grid;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .contact-item {
-            font-size: 1.1rem;
-            color: var(--text-gray);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-        }
-
-        .contact-item a {
-            color: var(--accent-green);
-            text-decoration: none;
-            transition: opacity 0.2s;
-        }
-
-        .contact-item a:hover {
-            opacity: 0.7;
-        }
-
         /* ============================================
-           PRINT STYLES
-        ============================================ */
-        @media print {
-            .page {
-                page-break-after: always;
-                padding: 3rem 2rem;
-            }
-            
-            .cover {
-                page-break-after: always;
-            }
-        }
+   PROJECT DETAIL BOARD - VISUAL SECTIONS
+============================================ */
 
-        /* ============================================
-           RESPONSIVE
-        ============================================ */
+.visual-grid-hero {
+    margin: 3rem 0;
+}
+
+.hero-image {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: var(--light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    border: 1px dashed var(--mid-gray);
+}
+
+.placeholder-text {
+    text-align: center;
+    padding: 1rem;
+}
+
+.visual-grid-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.grid-item {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: var(--light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    border: 1px dashed var(--mid-gray);
+}
+
+.grid-caption {
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.project-overview {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: var(--off-white);
+    border-radius: 4px;
+}
+
+.project-overview h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.project-overview p {
+    line-height: 1.8;
+    color: var(--text-gray);
+    margin-bottom: 1.5rem;
+}
+
+.visual-grid-triple {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+        /* RESPONSIVE */
         @media (max-width: 768px) {
-            .project-header {
+            .projects-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .project-metrics {
+                flex-direction: column;
+                gap: 1rem;
             }
 
             .visual-grid-split,
             .visual-grid-triple {
                 grid-template-columns: 1fr;
             }
+        }
 
-            .metrics-section {
-                grid-template-columns: 1fr;
-            }
+        /* FLOATING BACKGROUND SHAPES */
+        .bg-shape {
+            position: absolute;
+            opacity: 0.03;
+            pointer-events: none;
+            animation: float 20s ease-in-out infinite;
+        }
 
-            .page {
-                padding: 3rem 5%;
-            }
+        .bg-shape:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            width: 200px;
+            height: 200px;
+            background: var(--accent-green);
+            border-radius: 50%;
+        }
+
+        .bg-shape:nth-child(2) {
+            bottom: 20%;
+            right: 15%;
+            width: 150px;
+            height: 150px;
+            background: var(--text-dark);
+            transform: rotate(45deg);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
         }
     </style>
 </head>
 <body>
 
-    <!-- ============================================
-         COVER PAGE
-    ============================================ -->
-    <div class="cover">
-        <div class="cover-content">
-            <h1 class="cover-name">JOSUE MENDES</h1>
-            <p class="cover-title">BIM SPECIALIST / DIPLOM-ARCHITEKT</p>
-            <div class="cover-subtitle">
-                <span>Munich</span>
-                <span>Germany</span>
-                <span>6+ Years Experience</span>
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="bg-shape"></div>
+        <div class="bg-shape"></div>
+        
+        <h1 class="hero-name">JOSUE MENDES</h1>
+        <p class="hero-title">Architect · BIM Specialist · Digital Twin Researcher</p>
+        
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <!-- RESEARCH PROJECTS -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Research Projects</h2>
+            <p class="section-subtitle">Academic · Territorial · Indigenous</p>
+        </div>
+        
+        <div class="projects-grid">
+            
+            <!-- Wärüi Tapüy -->
+            <div class="project-card" onclick="openProject('wurui')">
+                <div class="project-icon">
+                    <span class="project-number">01</span>
+                    <div class="icon-shape">W</div>
+                </div>
+                <div class="project-info">
+                    <p class="project-category">Ethnographic Research</p>
+                    <h3 class="project-name">Wärüi Tapüy</h3>
+                    <p class="project-location">Kanaimö, Canaima · Venezuela</p>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-value">2 weeks</span>
+                            <span class="metric-label">Field Research</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">Pemón</span>
+                            <span class="metric-label">Indigenous</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="certification-strip">
-                <span>buildingSMART OpenBIM</span>
-                <span>ISO 19650</span>
-                <span>Graphisoft BIM Coordinator</span>
-                <span>LEED AP</span>
+
+            <!-- Mosquera -->
+            <div class="project-card" onclick="openProject('mosquera')">
+                <div class="project-icon">
+                    <span class="project-number">02</span>
+                    <div class="icon-shape">M</div>
+                </div>
+                <div class="project-info">
+                    <p class="project-category">Urban Planning · UPenn</p>
+                    <h3 class="project-name">Mosquera AgrodiverCity</h3>
+                    <p class="project-location">Cundinamarca · Colombia</p>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-value">Grade 1.4</span>
+                            <span class="metric-label">Academic</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">Graph</span>
+                            <span class="metric-label">Network</span>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <!-- Amazonas -->
+            <div class="project-card" onclick="openProject('amazonas')">
+                <div class="project-icon">
+                    <span class="project-number">03</span>
+                    <div class="icon-shape">A</div>
+                </div>
+                <div class="project-info">
+                    <p class="project-category">Territorial Governance</p>
+                    <h3 class="project-name">Amazonas Bolsón</h3>
+                    <p class="project-location">Amazon Basin · Venezuela-Brazil</p>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-value">UNESCO</span>
+                            <span class="metric-label">Heritage Site</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">Continental</span>
+                            <span class="metric-label">Scale</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SILVIA -->
+            <div class="project-card" onclick="openProject('silvia')">
+                <div class="project-icon">
+                    <span class="project-number">04</span>
+                    <div class="icon-shape">S</div>
+                </div>
+                <div class="project-info">
+                    <p class="project-category">Research · Digital Twin</p>
+                    <h3 class="project-name">SILVIA Framework</h3>
+                    <p class="project-location">Munich · 2022-Present</p>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-value">Zenodo</span>
+                            <span class="metric-label">Published</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">TRI</span>
+                            <span class="metric-label">Live PoC</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- BIM PROJECTS -->
+    <section class="section" style="background: var(--off-white);">
+        <div class="section-header">
+            <h2 class="section-title">BIM Coordination Projects</h2>
+            <p class="section-subtitle">ISO 19650 · openBIM · Technical Execution</p>
+        </div>
+        
+        <div class="projects-grid">
+            
+            <!-- Gran Sabana Field Station -->
+            <div class="project-card" onclick="openProject('gran_sabana')">
+                <div class="project-icon">
+                    <span class="project-number">05</span>
+                    <div class="icon-shape">G</div>
+                </div>
+                <div class="project-info">
+                    <p class="project-category">Research Field Station</p>
+                    <h3 class="project-name">Gran Sabana Field Station</h3>
+                    <p class="project-location">Canaima National Park · Venezuela</p>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-value">LOD 350</span>
+                            <span class="metric-label">BIM Model</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">Low-Impact</span>
+                            <span class="metric-label">Design</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Residenzquartier Schwabing -->
+            <div class="project-card" onclick="openProject('schwabing')">
+                <div class="project-icon">
+                    <span class="project-number">06</span>
+                    <div class="icon-shape">R</div>
+                </div>
+                <div class="project-info">
+                    <p class="project-category">Mixed-Use Development</p>
+                    <h3 class="project-name">Residenzquartier Schwabing</h3>
+                    <p class="project-location">Munich · Germany</p>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-value">€12M</span>
+                            <span class="metric-label">Project Value</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">340→18</span>
+                            <span class="metric-label">Clashes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Healthcare Hub Bogotá -->
+            <div class="project-card" onclick="openProject('healthcare')">
+                <div class="project-icon">
+                    <span class="project-number">07</span>
+                    <div class="icon-shape">H</div>
+                </div>
+                <div class="project-info">
+                    <p class="project-category">Healthcare Facility</p>
+                    <h3 class="project-name">Healthcare Hub Bogotá</h3>
+                    <p class="project-location">Bogotá · Colombia</p>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-value">4D Sim</span>
+                            <span class="metric-label">Navisworks</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">MEP</span>
+                            <span class="metric-label">Coordination</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PROFESSIONAL PROJECTS - ARKA ATELIER -->
+    <section class="section">
+        <div class="section-header">
+            <h2 class="section-title">Professional Practice</h2>
+            <p class="section-subtitle">Arka Atelier Studios · Competition · Community · 2018-2024</p>
+        </div>
+        
+        <div class="projects-grid">
+            
+            <!-- DOG SPOT -->
+            <div class="project-card" onclick="openProject('dogspot')">
+                <div class="project-icon">
+                    <span class="project-number">08</span>
+                    <div class="icon-shape">D</div>
+                </div>
+                <div class="project-info">
+                    <p class="project-category">Food Hall · Container Architecture</p>
+                    <h3 class="project-name">DOG SPOT</h3>
+                    <p class="project-location">Florida · USA</p>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-value">$25K</span>
+                            <span class="metric-label">Budget</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">Reutilized</span>
+                            <span class="metric-label">Container</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ROCKO Valle Arriba -->
+            <div class="project-card" onclick="openProject('rocko')">
+                <div class="project-icon">
+                    <span class="project-number">09</span>
+                    <div class="icon-shape">R</div>
+                </div>
+                <div class="project-info">
+                    <p class="project-category">Luxury Barbershop & Spa</p>
+                    <h3 class="project-name">ROCKO Valle Arriba</h3>
+                    <p class="project-location">Caracas · Venezuela</p>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-value">$1.5M</span>
+                            <span class="metric-label">Budget</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">BIM</span>
+                            <span class="metric-label">Full Coord</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LOTO Los Campitos -->
+            <div class="project-card" onclick="openProject('loto')">
+                <div class="project-icon">
+                    <span class="project-number">10</span>
+                    <div class="icon-shape">L</div>
+                </div>
+                <div class="project-info">
+                    <p class="project-category">Luxury Spa</p>
+                    <h3 class="project-name">LOTO Los Campitos</h3>
+                    <p class="project-location">Caracas · Venezuela</p>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-value">$10K</span>
+                            <span class="metric-label">Budget</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">Wellness</span>
+                            <span class="metric-label">Design</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AVILA GROUP -->
+            <div class="project-card" onclick="openProject('avila')">
+                <div class="project-icon">
+                    <span class="project-number">11</span>
+                    <div class="icon-shape">A</div>
+                </div>
+                <div class="project-info">
+                    <p class="project-category">BIM Management · Office Hangar</p>
+                    <h3 class="project-name">AVILA GROUP Hangar</h3>
+                    <p class="project-location">Las Mercedes, Caracas · Venezuela</p>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-value">$2M</span>
+                            <span class="metric-label">Budget</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">ISO 19650</span>
+                            <span class="metric-label">Compliance</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KABAL -->
+            <div class="project-card" onclick="openProject('kabal')">
+                <div class="project-icon">
+                    <span class="project-number">12</span>
+                    <div class="icon-shape">K</div>
+                </div>
+                <div class="project-info">
+                    <p class="project-category">Restaurant Bar · Urban Icon</p>
+                    <h3 class="project-name">KABAL</h3>
+                    <p class="project-location">Caracas · Venezuela</p>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-value">$1.7M</span>
+                            <span class="metric-label">Budget</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">Landmark</span>
+                            <span class="metric-label">Status</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- JULIETTA -->
+            <div class="project-card" onclick="openProject('julietta')">
+                <div class="project-icon">
+                    <span class="project-number">13</span>
+                    <div class="icon-shape">J</div>
+                </div>
+                <div class="project-info">
+                    <p class="project-category">Restaurant Renovation</p>
+                    <h3 class="project-name">JULIETTA</h3>
+                    <p class="project-location">Tolon, Caracas · Venezuela</p>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-value">$1.1M</span>
+                            <span class="metric-label">Budget</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">Retrofit</span>
+                            <span class="metric-label">Design</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MATILDA / LUPE -->
+            <div class="project-card" onclick="openProject('matilda')">
+                <div class="project-icon">
+                    <span class="project-number">14</span>
+                    <div class="icon-shape">M</div>
+                </div>
+                <div class="project-info">
+                    <p class="project-category">Restaurant Concept Development</p>
+                    <h3 class="project-name">MATILDA / LUPE</h3>
+                    <p class="project-location">Las Mercedes, Caracas · Venezuela</p>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-value">$1.5M</span>
+                            <span class="metric-label">Budget</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">Brand</span>
+                            <span class="metric-label">Integration</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PARQUE SEBUCÁN -->
+            <div class="project-card" onclick="openProject('sebucan')">
+                <div class="project-icon">
+                    <span class="project-number">15</span>
+                    <div class="icon-shape">P</div>
+                </div>
+                <div class="project-info">
+                    <p class="project-category">Competition · Public Space</p>
+                    <h3 class="project-name">Parque Sebucán</h3>
+                    <p class="project-location">Baruta, Caracas · Venezuela</p>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-value">Social</span>
+                            <span class="metric-label">Impact</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">Municipality</span>
+                            <span class="metric-label">Collaboration</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CAMPAMENTO 22 DE ENERO -->
+            <div class="project-card" onclick="openProject('campamento')">
+                <div class="project-icon">
+                    <span class="project-number">16</span>
+                    <div class="icon-shape">C</div>
+                </div>
+                <div class="project-info">
+                    <p class="project-category">Academic · Community Architecture</p>
+                    <h3 class="project-name">Campamento 22 de Enero</h3>
+                    <p class="project-location">Chacao, Caracas · Venezuela</p>
+                    <div class="project-metrics">
+                        <div class="metric">
+                            <span class="metric-value">Sustainable</span>
+                            <span class="metric-label">Retrofit</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">Self-Managed</span>
+                            <span class="metric-label">Community</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PROJECT DETAIL OVERLAY -->
+    <div class="project-detail" id="projectDetail">
+        <button class="close-button" onclick="closeProject()">×</button>
+        <div class="detail-content" id="detailContent">
+            <!-- Content loaded dynamically -->
         </div>
     </div>
 
-    <!-- ============================================
-         PROJECT 1: GRAN SABANA FIELD STATION
-    ============================================ -->
-    <div class="page">
-        <div class="project-header">
-            <div class="project-title-area">
-                <p class="project-type">Research Infrastructure</p>
-                <h2>Gran Sabana Field Station</h2>
+    <script>
+        // PROJECT DATA
+        const projects = {
+            wurui: {
+    title: "Wärüi Tapüy — The House of the Woman",
+    category: "Ethnographic Spatial Encoding",
+    description: "Two weeks of participatory field research in Kanaimö: interviews, observation, and Lynch-based path-landmark mapping to encode the spatial intelligence of the Pemón community. The proposal emerged from five space typologies with explicit self-governance criteria from the outset.",
+    connection: "Wärüi Tapüy identified the core epistemic gap: the spatial knowledge of the Pemón could not be communicated in real time, updated, or digitally governed. SILVIA is the technical response.",
+    meta: {
+        location: "Kanaimö, Canaima National Park, Venezuela",
+        year: "2023-2024",
+        role: "Lead Architect, Ethnographic Researcher",
+        software: "Lynch Mapping, Rhino, Grasshopper"
+    },
+    metrics: [
+        { value: "2 weeks", label: "Field Research" },
+        { value: "5", label: "Space Typologies" },
+        { value: "Pemón", label: "Indigenous Community" }
+    ],
+    tools: ["Kevin Lynch Methodology", "Participatory Design", "Rhino 7", "Grasshopper", "Adobe Suite"],
+    overview: "Ethnographic encoding of indigenous spatial knowledge through participatory design. Multi-scalar catalogue of landscape-architecture rules adaptable to Amazonian regional contexts. Self-governance criteria embedded from project inception, validating community identity as quality measure.",
+    images: {
+        hero: "→ System Intervention Map / GIS Analysis / 1920x1080px",
+        split1: "→ Base Rules System / Three Original Archetypes",
+        split1Caption: "Morphable Spatial Typologies from Pemón Culture",
+        split2: "→ Generative System / BIM Models",
+        split2Caption: "Productive Node S04 Iterations",
+        detail1: "→ Kevin Lynch Mapping",
+        detail1Caption: "Paths, Landmarks, Districts Analysis",
+        detail2: "→ Community Co-validation",
+        detail2Caption: "Self-Governance Integration",
+        detail3: "→ Exterior Render",
+        detail3Caption: "La Casa de la Mujer / Ecotourism Node"
+    }
+},
+            mosquera: {
+    title: "Mosquera AgrodiverCity",
+    category: "Graph-based Territorial Urbanism",
+    description: "UPenn Exchange Workshop addressing structural dissociation between two settlement cores. The framework is replicable and heterogeneous — not a masterplan but a set of combinatorial rules applicable asynchronously across the territory.",
+    connection: "AgrodiverCity introduced a graph-based reading of territory: nodes, edges, and cells derived from ecological infrastructure rather than planning convention. This logic reappears directly in SILVIA's ontological architecture.",
+    meta: {
+        location: "Mosquera, Cundinamarca, Colombia",
+        year: "2021-2022",
+        role: "Urban Designer, Team Lead (Team 2 USB)",
+        software: "QGIS, Rhino, Grasshopper, InDesign"
+    },
+    metrics: [
+        { value: "Grade 1.4", label: "Academic Excellence" },
+        { value: "100+", label: "Combinatorial Rules" },
+        { value: "UPenn", label: "Exchange Program" }
+    ],
+    tools: ["QGIS", "Rhino 7", "Grasshopper", "Adobe InDesign", "Illustrator"],
+    overview: "Graph-based territorial framework merging three municipalities into agro-agricultural urban rail corridor. Replicable typological catalogue operating via mixed-use organisers at multiple scales. Circular economy integration: hydroponics, biofilters, material flows separable across activities.",
+    images: {
+        hero: "→ Territorial Network / Nodes and Corridors / 1920x1080px",
+        split1: "→ Regional Master Plan / GIS Analysis",
+        split1Caption: "Problems → Opportunities Strategy",
+        split2: "→ Occupancy Cells / Ecological Polygons",
+        split2Caption: "Derived from Landscape Logic",
+        detail1: "→ Corridor Typology",
+        detail1Caption: "Wetlands + Waterways Integration",
+        detail2: "→ Circular Economy Diagram",
+        detail2Caption: "Hydroponics & Biofilters Flow",
+        detail3: "→ Aerial Masterplan Render",
+        detail3Caption: "La Sabana Regional Vision"
+    }
+},
+            amazonas: {
+    title: "Amazonas — Environmental Protection Bolsón",
+    category: "Territorial Governance at Continental Scale",
+    description: "Addressing UNESCO World Heritage Site protection through an environmental bolsón: a containment system linking tepuis, Orinoco downstream networks, and lowland water systems into a coherent protection continuum.",
+    connection: "The Amazonas studio asked the governance question that SILVIA was built to answer: how do you monitor and protect a living territory in real time? The bolsón is a spatial proposition — SILVIA is its informational counterpart.",
+    meta: {
+        location: "Amazon Basin, Venezuela-Brazil",
+        year: "2025",
+        role: "Workshop Team Trainer, Design Contributor",
+        software: "QGIS, Rhino, Twinmotion, AutoCAD"
+    },
+    metrics: [
+        { value: "UNESCO", label: "Heritage Site" },
+        { value: "Continental", label: "Scale" },
+        { value: "7 weeks", label: "Workshop Duration" }
+    ],
+    tools: ["QGIS", "Rhino 7", "Twinmotion", "AutoCAD", "Adobe Suite"],
+    overview: "Minimalist principle: infrastructure that barely touches ground. Territorial scale water conduct parallel to lake altitudes at biological footprint. Framework designed for continental-scale replication across Amazon basin contexts. Protection as presence, not enclosure.",
+    images: {
+        hero: "→ Territorial Map / Bolsón Containment System / 1920x1080px",
+        split1: "→ Profile Concept / Suspended River",
+        split1Caption: "Elevated + Embedded Infrastructure",
+        split2: "→ Tepuis Integration / Structural Analysis",
+        split2Caption: "Minimal Footprint at Lake Altitude",
+        detail1: "→ Water Infrastructure Network",
+        detail1Caption: "Juncal + Rivers as Ecological Connectors",
+        detail2: "→ UNESCO Heritage Protection Zones",
+        detail2Caption: "Fragmented Areas → Coherent Continuum",
+        detail3: "→ Landscape Section Render",
+        detail3Caption: "Near-Mythic Calm Waters"
+    }
+},
+            silvia: {
+    title: "SILVIA — Federated Digital Twin Framework",
+    category: "Sovereign Information Learning Virtual Intelligent Architecture",
+    description: "Federated Digital Twin lifecycle (Shadow to Mature) using Territorial Regeneration Index (TRI) to convert qualitative ecological knowledge into actionable data. Live WhatsApp proof-of-concept running with Flask, Twilio, Cloudflare Tunnel, and Claude API.",
+    connection: "Published Zenodo preprint v1 (March 2026): doi.org/10.5281/zenodo.19151384 · CC-BY 4.0 · AGPL-3.0. TRI = ƒ(ESD · TCI · RAR · IIS) — sovereignty as quantified variable, not policy.",
+    meta: {
+        location: "Munich, Germany · Remote Development",
+        year: "2022-Present",
+        role: "Lead Researcher, Full-Stack Developer",
+        software: "Python, Flask, Claude API, Obsidian, Git"
+    },
+    metrics: [
+        { value: "TRI 0.811", label: "Highest Score Recorded" },
+        { value: "Zenodo", label: "Published DOI" },
+        { value: "Live PoC", label: "WhatsApp Running" }
+    ],
+    tools: ["Python", "Flask", "Twilio", "Claude API", "Cloudflare Tunnel", "Obsidian", "GitHub"],
+    overview: "Modular SILVIA Stack: SILVIA Field (offline-first WhatsApp interface), SILVIA Governance (CARE Principles implementation), SILVIA Urban/Heritage (framework adaptation). TRI formula quantifies Indigenous Information Sovereignty (IIS) as variable, not policy statement. Live proof-of-concept processes WhatsApp messages with real-time territorial regeneration scoring.",
+    images: {
+        hero: "→ Live WhatsApp Exchange / TRI Calculation / 1920x1080px",
+        split1: "→ System Architecture Diagram",
+        split1Caption: "Flask → Twilio → Claude API → Obsidian",
+        split2: "→ TRI Score Visualization",
+        split2Caption: "Shadow (0.439) → Mature (0.811) Lifecycle",
+        detail1: "→ Plugin Architecture",
+        detail1Caption: "Kanaimö + Caracas Knowledge Bases",
+        detail2: "→ Obsidian Graph Density",
+        detail2Caption: "Digital Twin Maturity Indicator",
+        detail3: "→ Zenodo DOI Publication",
+        detail3Caption: "Academic Preprint CC-BY 4.0"
+    }
+},
+            gran_sabana: {
+    title: "Gran Sabana Field Station",
+    category: "Research Infrastructure · Indigenous Territory",
+    description: "Low-impact research facility for Canaima National Park. BIM model (LOD 350) coordinated for remote construction with local materials. Design integrates Pemón spatial principles with contemporary construction standards.",
+    connection: "Technical companion to Wärüi Tapüy: translates ethnographic research into buildable infrastructure while maintaining territorial sovereignty principles.",
+    meta: {
+        location: "Gran Sabana, Canaima National Park, Venezuela",
+        year: "2024",
+        role: "BIM Lead, Parametric Design",
+        software: "Revit, Dynamo, Grasshopper, Twinmotion"
+    },
+    metrics: [
+        { value: "LOD 350", label: "BIM Model Detail" },
+        { value: "850m²", label: "Built Area" },
+        { value: "40%", label: "Faster Modeling (Dynamo)" }
+    ],
+    tools: ["Revit 2024", "Dynamo", "Grasshopper", "Twinmotion", "Navisworks"],
+    overview: "Parametric facade system optimized for Gran Sabana's extreme climate. BIM workflow integrated indigenous territorial knowledge with technical specifications. Custom Dynamo scripts automated facade pattern generation, reducing modeling time by 40%. Low-impact construction strategy respects territorial sovereignty.",
+    images: {
+        hero: "→ Axonometric Exploded View / BIM Model / 1920x1080px",
+        split1: "→ Ground Floor Plan / Technical",
+        split1Caption: "Research Spaces Layout 1:100",
+        split2: "→ Longitudinal Section / Technical",
+        split2Caption: "Climate Response Strategy 1:100",
+        detail1: "→ Facade Connection Detail",
+        detail1Caption: "Parametric Pattern System",
+        detail2: "→ Foundation System",
+        detail2Caption: "Low-Impact Construction",
+        detail3: "→ Exterior Render",
+        detail3Caption: "Twinmotion Visualization"
+    }
+},
+            schwabing: {
+    title: "Residenzquartier Schwabing — Mixed-Use Development",
+    category: "€12M Urban Project · Munich, Germany",
+    description: "Full BIM coordination for residential and retail complex. Clash detection reduced collisions from 340 to under 20, saving approximately 3 weeks of rework. Multidisciplinary model coordination (Architecture, MEP, Structure) under ISO 19650 standards.",
+    connection: "Demonstrates BIM coordination capability at urban scale — same information management rigor that underpins SILVIA's territorial data governance.",
+    meta: {
+        location: "Schwabing, Munich, Germany",
+        year: "2023-2024",
+        role: "BIM Coordinator, Clash Detection Lead",
+        software: "Revit, Navisworks, Solibri, BIM 360"
+    },
+    metrics: [
+        { value: "€12M", label: "Project Value" },
+        { value: "340→18", label: "Clash Reduction" },
+        { value: "3 weeks", label: "Time Saved" }
+    ],
+    tools: ["Revit 2024", "Navisworks Manage", "Solibri Model Checker", "BIM 360", "AutoCAD"],
+    overview: "ISO 19650 information management implementation for large-scale urban development. Multidisciplinary coordination (Architecture, MEP, Structural) resulted in 94% clash reduction. Model-based QA with Solibri ensured regulatory compliance. BIM 360 cloud collaboration enabled real-time stakeholder coordination.",
+    images: {
+        hero: "→ Federated BIM Model / Coordination View / 1920x1080px",
+        split1: "→ Site Plan / Urban Context",
+        split1Caption: "Mixed-Use Integration Strategy 1:500",
+        split2: "→ Clash Detection Report / Navisworks",
+        split2Caption: "Before: 340 | After: 18 Clashes",
+        detail1: "→ MEP Coordination Detail",
+        detail1Caption: "Multidisciplinary Integration",
+        detail2: "→ Solibri Quality Check",
+        detail2Caption: "ISO 19650 Compliance Validation",
+        detail3: "→ Exterior Street View Render",
+        detail3Caption: "Urban Context Visualization"
+    }
+},
+           healthcare: {
+    title: "Healthcare Hub Bogotá",
+    category: "Medical Facility · 4D Simulation",
+    description: "Healthcare facility with complex MEP systems. 4D construction simulation in Navisworks for phased delivery. Model-based QA with Solibri ensured regulatory compliance for medical infrastructure.",
+    connection: "Healthcare BIM coordination shares informational complexity with territorial monitoring — both require real-time data validation and multi-stakeholder governance.",
+    meta: {
+        location: "Bogotá, Colombia",
+        year: "2023",
+        role: "BIM Coordinator, 4D Planning Lead",
+        software: "Revit, Navisworks, Solibri, Synchro"
+    },
+    metrics: [
+        { value: "4D Sim", label: "Construction Phasing" },
+        { value: "MEP", label: "Complex Coordination" },
+        { value: "ISO", label: "Regulatory Compliance" }
+    ],
+    tools: ["Revit 2023", "Navisworks Manage", "Solibri", "Synchro 4D", "AutoCAD MEP"],
+    overview: "Medical infrastructure requiring precise MEP coordination under strict regulatory standards. 4D construction simulation enabled phased delivery without disrupting adjacent hospital operations. Solibri automated code compliance checking for healthcare-specific requirements. Model served as single source of truth for all stakeholders.",
+    images: {
+        hero: "→ 4D Construction Sequence / Navisworks / 1920x1080px",
+        split1: "→ MEP Coordination Plan / Technical",
+        split1Caption: "Complex Systems Integration 1:100",
+        split2: "→ Phasing Strategy / 4D Timeline",
+        split2Caption: "Construction Sequence Analysis",
+        detail1: "→ Medical Gas Systems Detail",
+        detail1Caption: "Healthcare-Specific MEP",
+        detail2: "→ Solibri Code Compliance Check",
+        detail2Caption: "Regulatory Standards Validation",
+        detail3: "→ Exterior Render / Patient Wing",
+        detail3Caption: "Healthcare Facility Visualization"
+    }
+},
+            dogspot: {
+    title: "DOG SPOT — Container Food Hall",
+    category: "Sustainable Reuse · Florida, USA",
+    description: "Shipping container adaptive reuse for contemporary gastronomy space. Two-phase development: container adaptation followed by secondary structural frame. Urban visual identity with integrated BIM coordination from planning through execution. Budget: $25,000.",
+    connection: "Demonstrates resourcefulness under constraints — same principle that drives SILVIA's offline-first architecture for low-connectivity environments.",
+    meta: {
+        location: "Florida, USA",
+        year: "2022",
+        role: "Design Lead, BIM Coordinator",
+        software: "Revit, SketchUp, Twinmotion, AutoCAD"
+    },
+    metrics: [
+        { value: "$25K", label: "Budget" },
+        { value: "Container", label: "Reutilized Infrastructure" },
+        { value: "2 phases", label: "Construction Sequence" }
+    ],
+    tools: ["Revit 2022", "SketchUp Pro", "Twinmotion", "AutoCAD", "Photoshop"],
+    overview: "Container-based gastronomy demonstrating design excellence under extreme budget constraints. Phase 1: container adaptation and weatherproofing. Phase 2: secondary steel frame for brand identity and climate control. BIM coordination ensured precise fabrication despite minimal budget. Sustainable reuse as design driver, not limitation.",
+    images: {
+        hero: "→ Container Axonometric / Exploded View / 1920x1080px",
+        split1: "→ Phase 1 / Container Adaptation Plan",
+        split1Caption: "Base Infrastructure Conversion",
+        split2: "→ Phase 2 / Secondary Frame Addition",
+        split2Caption: "Brand Identity Integration",
+        detail1: "→ Connection Detail / Steel Frame",
+        detail1Caption: "Container-to-Frame Junction",
+        detail2: "→ Branding Graphics / Facade",
+        detail2Caption: "Urban Visual Identity",
+        detail3: "→ Exterior Render / Night View",
+        detail3Caption: "DOG SPOT Completed"
+    }
+},
+            rocko: {
+    title: "ROCKO Valle Arriba — Luxury Barbershop & Spa",
+    category: "High-End Retail · Caracas",
+    description: "Located in Valle Arriba Shopping Center. Elegant materiality, precise lighting, functional spatial organization. Spiral staircase as spatial and symbolic center. BIM coordination ensured quality, efficiency, and design precision. Budget: $1.5M.",
+    connection: "BIM coordination at luxury standard — information management directly determined project quality, analogous to territorial data governance in SILVIA.",
+    meta: {
+        location: "Valle Arriba, Caracas, Venezuela",
+        year: "2022",
+        role: "Lead Architect, BIM Coordinator",
+        software: "Revit, 3ds Max, V-Ray, AutoCAD"
+    },
+    metrics: [
+        { value: "$1.5M", label: "Budget" },
+        { value: "BIM", label: "Full Coordination" },
+        { value: "Luxury", label: "High-End Finish" }
+    ],
+    tools: ["Revit 2022", "3ds Max", "V-Ray", "AutoCAD", "Photoshop"],
+    overview: "Luxury barbershop redefining high-end grooming spaces in Caracas. Spiral staircase serves as spatial organizing element and symbolic centerpiece. BIM coordination integrated architecture, lighting design, and millwork fabrication. 3ds Max + V-Ray produced photorealistic client presentations. Detail precision directly determined luxury perception and project success.",
+    images: {
+        hero: "→ Interior Perspective / Main Space / 1920x1080px",
+        split1: "→ Ground Floor Plan / Spatial Organization",
+        split1Caption: "Service Areas + Circulation 1:50",
+        split2: "→ Upper Floor Plan / VIP Lounge",
+        split2Caption: "Exclusive Client Spaces 1:50",
+        detail1: "→ Spiral Staircase Detail",
+        detail1Caption: "Symbolic Centerpiece",
+        detail2: "→ Lighting Design / Fixture Layout",
+        detail2Caption: "Precision Illumination Strategy",
+        detail3: "→ V-Ray Render / Interior Ambiance",
+        detail3Caption: "Luxury Material Expression"
+    }
+},
+            loto: {
+    title: "LOTO Los Campitos — Luxury Spa",
+    category: "Wellness Design · Caracas",
+    description: "Interior designed through color and spatial psychology to promote wellbeing and balance. Minimalist approach with precise material selection creates harmonious interplay between function and atmosphere. Budget: $10,000.",
+    connection: "Low-budget, high-impact design — constraint as creative driver, similar to SILVIA's offline-first technical architecture.",
+    meta: {
+        location: "Los Campitos, Caracas, Venezuela",
+        year: "2024",
+        role: "Interior Designer, BIM Coordinator",
+        software: "Revit, Twinmotion, AutoCAD, Photoshop"
+    },
+    metrics: [
+        { value: "$10K", label: "Budget" },
+        { value: "Wellness", label: "Spatial Psychology" },
+        { value: "Minimal", label: "Design Approach" }
+    ],
+    tools: ["Revit 2024", "Twinmotion", "AutoCAD", "Photoshop", "Illustrator"],
+    overview: "Wellness-focused interior leveraging color psychology and spatial planning to create therapeutic atmosphere. Minimalist material palette (natural wood, white surfaces, green accents) maximizes perceived luxury under strict budget. Lighting design emphasizes calm and restoration. Constraint became creative catalyst, proving design impact independent of budget scale.",
+    images: {
+        hero: "→ Interior Perspective / Treatment Room / 1920x1080px",
+        split1: "→ Floor Plan / Spatial Flow",
+        split1Caption: "Wellness Journey Sequence 1:50",
+        split2: "→ Color Psychology Diagram",
+        split2Caption: "Material + Palette Strategy",
+        detail1: "→ Material Board / Natural Textures",
+        detail1Caption: "Minimalist Palette Selection",
+        detail2: "→ Lighting Design / Ambiance Control",
+        detail2Caption: "Therapeutic Illumination",
+        detail3: "→ Twinmotion Render / Reception",
+        detail3Caption: "Calm + Balance Atmosphere"
+    }
+},
+           avila: {
+    title: "AVILA GROUP Office Hangar",
+    category: "BIM Project Management · ISO 19650",
+    description: "Project leadership and BIM management for office hangar under ISO 19650 standards. Revit modeling, Navisworks 4D simulation for schedule tracking, Solibri for QA and clash detection. Highly efficient, transparent project delivery. Budget: $2M.",
+    connection: "ISO 19650 compliance demonstrates formal information management capability — same governance rigor applied to territorial contexts in SILVIA.",
+    meta: {
+        location: "Las Mercedes, Caracas, Venezuela",
+        year: "2021",
+        role: "BIM Manager, Project Coordinator",
+        software: "Revit, Navisworks, Solibri, MS Project"
+    },
+    metrics: [
+        { value: "$2M", label: "Project Budget" },
+        { value: "ISO 19650", label: "Standards Compliance" },
+        { value: "4D", label: "Schedule Simulation" }
+    ],
+    tools: ["Revit 2021", "Navisworks Manage", "Solibri Model Checker", "MS Project", "AutoCAD"],
+    overview: "Full BIM project management role implementing ISO 19650 information management standards. Revit served as authoring tool, Navisworks enabled 4D schedule simulation for client presentations. Solibri automated quality assurance and regulatory compliance checking. MS Project integrated with BIM model for real-time schedule-cost-design coordination. Transparent delivery demonstrated BIM value proposition to client.",
+    images: {
+        hero: "→ BIM Coordination Model / Isometric View / 1920x1080px",
+        split1: "→ Architectural Floor Plan / Office Layout",
+        split1Caption: "Hangar Space Planning 1:200",
+        split2: "→ 4D Construction Simulation / Timeline",
+        split2Caption: "Schedule Integration Strategy",
+        detail1: "→ ISO 19650 Workflow Diagram",
+        detail1Caption: "Information Management Protocol",
+        detail2: "→ Solibri Quality Dashboard",
+        detail2Caption: "Automated Compliance Checking",
+        detail3: "→ Exterior Render / Hangar Facade",
+        detail3Caption: "Office Complex Visualization"
+    }
+},
+            kabal: {
+    title: "KABAL Restaurant Bar",
+    category: "Urban Landmark · Caracas",
+    description: "Comprehensive design, BIM modeling, and architectural supervision. Project transcended functionality to become urban icon and design benchmark. Technical coordination of all construction elements with design fidelity. Timeless aesthetic through organic element integration. Budget: $1.7M.",
+    connection: "Urban landmark status demonstrates design impact beyond technical execution — aspiration for SILVIA to become infrastructure standard for territorial governance.",
+    meta: {
+        location: "Caracas, Venezuela",
+        year: "2020",
+        role: "Lead Architect, Construction Supervisor",
+        software: "Revit, 3ds Max, V-Ray, AutoCAD"
+    },
+    metrics: [
+        { value: "$1.7M", label: "Budget" },
+        { value: "Landmark", label: "Urban Icon Status" },
+        { value: "BIM", label: "Full Coordination" }
+    ],
+    tools: ["Revit 2020", "3ds Max", "V-Ray", "AutoCAD", "Photoshop"],
+    overview: "Restaurant-bar establishing new design benchmark in Caracas gastronomy scene. Integration of organic elements (living wall, natural textures) with contemporary materiality created timeless aesthetic. BIM coordination ensured precise execution of complex geometric forms. Architectural supervision maintained design fidelity through construction. Project's urban landmark status validates design impact as cultural infrastructure.",
+    images: {
+        hero: "→ Interior Perspective / Main Dining Hall / 1920x1080px",
+        split1: "→ Ground Floor Plan / Layout Strategy",
+        split1Caption: "Dining + Bar + Kitchen 1:100",
+        split2: "→ Upper Mezzanine / VIP Zone",
+        split2Caption: "Elevated Dining Experience 1:100",
+        detail1: "→ Living Wall Detail / Biophilic Design",
+        detail1Caption: "Organic Element Integration",
+        detail2: "→ Bar Counter Detail / Materiality",
+        detail2Caption: "Custom Millwork Coordination",
+        detail3: "→ V-Ray Render / Atmospheric Lighting",
+        detail3Caption: "Urban Landmark Visualization"
+    }
+},
+            julietta: {
+    title: "JULIETTA Restaurant",
+    category: "Renovation · Tolon, Caracas",
+    description: "Design leadership and supervision for comprehensive renovation in prestigious shopping center. Created distinctive interior atmosphere synthesizing gastronomic concept, operational functionality, and customer profile. Strategic architectural design maximized comfort and user experience. Budget: $1.1M.",
+    connection: "Retrofit design under operational constraints — similar to adapting SILVIA framework to existing territorial governance structures.",
+    meta: {
+        location: "Tolon, Caracas, Venezuela",
+        year: "2021",
+        role: "Design Lead, Architectural Supervision",
+        software: "Revit, SketchUp, Twinmotion, AutoCAD"
+    },
+    metrics: [
+        { value: "$1.1M", label: "Budget" },
+        { value: "Retrofit", label: "Renovation Type" },
+        { value: "Shopping", label: "Retail Context" }
+    ],
+    tools: ["Revit 2021", "SketchUp Pro", "Twinmotion", "AutoCAD", "Illustrator"],
+    overview: "Restaurant renovation in high-traffic shopping center requiring design excellence within existing shell constraints. Synthesis of gastronomic brand identity, operational kitchen requirements, and customer experience optimization. Adaptive design respected structural limitations while maximizing spatial quality. Supervision ensured brand compliance through construction under compressed schedule.",
+    images: {
+        hero: "→ Interior Render / Dining Area / 1920x1080px",
+        split1: "→ Floor Plan / Before Renovation",
+        split1Caption: "Existing Conditions Analysis 1:100",
+        split2: "→ Floor Plan / After Renovation",
+        split2Caption: "Optimized Layout Strategy 1:100",
+        detail1: "→ Facade Intervention / Retail Context",
+        detail1Caption: "Shopping Center Integration",
+        detail2: "→ Kitchen Layout / Operational Flow",
+        detail2Caption: "Back-of-House Optimization",
+        detail3: "→ Twinmotion Render / Terrace Extension",
+        detail3Caption: "Customer Experience Enhancement"
+    }
+},
+           matilda: {
+    title: "MATILDA / LUPE Concept Development",
+    category: "Brand-Spatial Integration · Las Mercedes",
+    description: "Concept design and brand development. Original two-story Matilda concept successfully transferred to Lupe project including terrace extension. Deep exploration of Mexican cultural elements for immersive, brand-compliant atmosphere. Demonstrates high adaptability of architectural design. Budget: $1.5M.",
+    connection: "Transferable design framework — analogous to SILVIA's modular community-plugin architecture where same core infrastructure adapts to different territories.",
+    meta: {
+        location: "Las Mercedes, Caracas, Venezuela",
+        year: "2022",
+        role: "Concept Designer, Brand Architect",
+        software: "SketchUp, Twinmotion, AutoCAD, Illustrator"
+    },
+    metrics: [
+        { value: "$1.5M", label: "Combined Budget" },
+        { value: "Brand", label: "Spatial Integration" },
+        { value: "2 Projects", label: "Transferred Concept" }
+    ],
+    tools: ["SketchUp Pro", "Twinmotion", "AutoCAD", "Illustrator", "Photoshop"],
+    overview: "Brand-spatial concept demonstrating design framework adaptability. Original Matilda concept (two-story, enclosed) successfully transferred to Lupe (single-level, terrace-focused) while maintaining brand identity coherence. Deep cultural research into Mexican gastronomy informed immersive atmosphere creation. Transferable framework validated modular design thinking: core identity + contextual adaptation.",
+    images: {
+        hero: "→ Concept Collage / Brand Identity / 1920x1080px",
+        split1: "→ Matilda Original Concept / 2-Story",
+        split1Caption: "Enclosed Dining Experience",
+        split2: "→ Lupe Adapted Concept / Terrace",
+        split2Caption: "Open-Air Gastronomy",
+        detail1: "→ Mexican Cultural Elements / Research",
+        detail1Caption: "Immersive Atmosphere Strategy",
+        detail2: "→ Brand Coherence Diagram",
+        detail2Caption: "Core Identity + Adaptation",
+        detail3: "→ Twinmotion Render / Lupe Terrace",
+        detail3Caption: "Transferred Concept Realization"
+    }
+},
+            sebucan: {
+    title: "Parque Sebucán — Community Meets City",
+    category: "Competition · Public Space Design · Baruta Municipality",
+    description: "Comprehensive project with high social impact developed in collaboration with interdisciplinary team (Architecture, Landscape Architecture, Sociology, Project Management) for Baruta Municipality and Sebucán community. Team management and coordination to conceive holistic public space addressing urban, architectural-landscape, and social community needs. Consensus-driven, feasible proposal currently in implementation planning phase (resource management). Demonstrates ability to lead complex projects with holistic vision.",
+    connection: "Participatory design methodology mirrors SILVIA's community-centric approach — both prioritize stakeholder sovereignty and self-determined quality validation.",
+    meta: {
+        location: "Baruta, Caracas, Venezuela",
+        year: "2023",
+        role: "Team Coordinator, Architectural Lead",
+        software: "Rhino, AutoCAD, SketchUp, InDesign"
+    },
+    metrics: [
+        { value: "Social", label: "High Impact" },
+        { value: "Municipality", label: "Government Collaboration" },
+        { value: "Interdisciplinary", label: "Team Approach" }
+    ],
+    tools: ["Rhino 7", "AutoCAD", "SketchUp Pro", "Adobe InDesign", "Illustrator"],
+    overview: "Public space competition demonstrating interdisciplinary leadership for high social impact project. Team coordination across architecture, landscape, sociology, and project management disciplines. Participatory design methodology ensured community needs drove spatial decisions. Consensus-based proposal now in implementation planning validates holistic vision. Government collaboration demonstrated capacity for complex stakeholder coordination.",
+    images: {
+        hero: "→ Masterplan Aerial View / Public Space / 1920x1080px",
+        split1: "→ Site Analysis / Urban Context",
+        split1Caption: "Community Integration Strategy",
+        split2: "→ Landscape Design / Green Infrastructure",
+        split2Caption: "Ecological + Social Needs",
+        detail1: "→ Participatory Design Workshop",
+        detail1Caption: "Community Co-Creation Process",
+        detail2: "→ Interdisciplinary Collaboration",
+        detail2Caption: "Team Coordination Diagram",
+        detail3: "→ Perspective Render / Central Plaza",
+        detail3Caption: "Community Gathering Space"
+    }
+},
+            campamento: {
+    title: "Campamento 22 de Enero — Sustainable Community Architecture",
+    category: "Academic Research · Self-Managed Community · Chacao",
+    description: "Leading role in metropolitan, urban, and architectural design for restructuring Campamento 22 de Enero sector, a self-managed community in Chacao municipality. Project conceived after comprehensive structural analysis of existing buildings, focusing on sustainability, commercial family production, and community wellbeing. Methodology integrated architectural elements and urban themes leveraging site advantages. Resulted in proposal ready for implementation in Estado Leal sector, establishing model for proactive, socially responsible urban renewal.",
+    connection: "Self-governed community design resonates with SILVIA's data sovereignty principles — architecture that respects existing social structures while enabling technical improvement.",
+    meta: {
+        location: "Chacao, Caracas, Venezuela",
+        year: "2024",
+        role: "Urban Designer, Architectural Lead",
+        software: "Revit, SketchUp, AutoCAD, InDesign"
+    },
+    metrics: [
+        { value: "Sustainable", label: "Design Focus" },
+        { value: "Self-Managed", label: "Community Type" },
+        { value: "Retrofit", label: "Urban Renewal" }
+    ],
+    tools: ["Revit 2024", "SketchUp Pro", "AutoCAD", "Adobe InDesign", "Photoshop"],
+    overview: "Self-managed community retrofit demonstrating socially responsible urban renewal. Comprehensive structural analysis preceded design intervention, ensuring community safety and sustainability. Focus on commercial family production enabled economic self-determination. Architectural methodology respected existing social structures while introducing technical improvements. Proposal ready for implementation serves as model for proactive community-led urban development.",
+    images: {
+        hero: "→ Urban Retrofit Strategy / Aerial View / 1920x1080px",
+        split1: "→ Existing Conditions / Structural Analysis",
+        split1Caption: "Community Infrastructure Assessment",
+        split2: "→ Proposed Intervention / Sustainability",
+        split2Caption: "Commercial + Residential Integration",
+        detail1: "→ Self-Governance Framework",
+        detail1Caption: "Community-Led Decision Making",
+        detail2: "→ Sustainable Systems Diagram",
+        detail2Caption: "Family Production + Wellbeing",
+        detail3: "→ Perspective Render / Estado Leal",
+        detail3Caption: "Urban Renewal Implementation"
+    }
+}
+};
+
+        function openProject(projectId) {
+    const project = projects[projectId];
+    const detailDiv = document.getElementById('projectDetail');
+    const contentDiv = document.getElementById('detailContent');
+
+    // Build meta HTML
+    let metaHTML = `
+        <div class="board-meta">
+            <div class="meta-item">
+                <span class="meta-label">Location</span>
+                <span class="meta-value">${project.meta.location}</span>
             </div>
-            <div class="project-meta">
-                <div class="meta-item">
-                    <span class="meta-label">Location</span>
-                    <span class="meta-value">Canaima, Venezuela</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-label">Year</span>
-                    <span class="meta-value">2024</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-label">Role</span>
-                    <span class="meta-value">BIM Lead, Parametric Design</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-label">Software</span>
-                    <span class="meta-value">Revit, Dynamo, Grasshopper</span>
-                </div>
+            <div class="meta-item">
+                <span class="meta-label">Year</span>
+                <span class="meta-value">${project.meta.year}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Role</span>
+                <span class="meta-value">${project.meta.role}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Software</span>
+                <span class="meta-value">${project.meta.software}</span>
             </div>
         </div>
-
-        <!-- HERO IMAGE -->
+    `;
+    
+    // Build hero image HTML
+    let heroHTML = `
         <div class="visual-grid-hero">
             <div class="hero-image">
-                <span class="placeholder-text">→ Axonometric Exploded View / 1920x1080px</span>
+                <span class="placeholder-text">${project.images.hero}</span>
             </div>
         </div>
-
-        <!-- TECHNICAL METRICS -->
-        <div class="metrics-section">
-            <div class="metric">
-                <div class="metric-value">40%</div>
-                <div class="metric-label">Faster Modeling</div>
+    `;
+    
+    // Build metrics HTML
+    let metricsHTML = '<div class="board-metrics">';
+    project.metrics.forEach(metric => {
+        metricsHTML += `
+            <div class="board-metric">
+                <div class="board-metric-value">${metric.value}</div>
+                <div class="board-metric-label">${metric.label}</div>
             </div>
-            <div class="metric">
-                <div class="metric-value">850m²</div>
-                <div class="metric-label">Built Area</div>
-            </div>
-            <div class="metric">
-                <div class="metric-value">12</div>
-                <div class="metric-label">Parametric Families</div>
-            </div>
-        </div>
-
-        <!-- SPLIT GRID -->
+        `;
+    });
+    metricsHTML += '</div>';
+    
+    // Build split grid HTML
+    let splitGridHTML = `
         <div class="visual-grid-split">
             <div>
                 <div class="grid-item">
-                    <span class="placeholder-text">→ Floor Plan / Technical</span>
+                    <span class="placeholder-text">${project.images.split1}</span>
                 </div>
-                <p class="grid-caption">Ground Floor Plan 1:100</p>
+                <p class="grid-caption">${project.images.split1Caption}</p>
             </div>
             <div>
                 <div class="grid-item">
-                    <span class="placeholder-text">→ Section Cut / Technical</span>
+                    <span class="placeholder-text">${project.images.split2}</span>
                 </div>
-                <p class="grid-caption">Longitudinal Section 1:100</p>
+                <p class="grid-caption">${project.images.split2Caption}</p>
             </div>
         </div>
-
-        <!-- MINIMAL TEXT -->
-        <div class="text-section">
+    `;
+    
+    // Build project overview HTML
+    let overviewHTML = `
+        <div class="project-overview">
             <h3>Project Overview</h3>
-            <p>Parametric facade system optimized for Gran Sabana's extreme climate. BIM workflow integrated indigenous territorial knowledge with technical specifications. Custom Dynamo scripts automated facade pattern generation, reducing modeling time by 40%.</p>
-            
-            <div class="tools-list">
-                <span class="tool-tag">Revit 2024</span>
-                <span class="tool-tag">Dynamo</span>
-                <span class="tool-tag">Twinmotion</span>
-                <span class="tool-tag">Navisworks</span>
+            <p>${project.overview}</p>
+            <div class="board-tools">
+                ${project.tools.map(tool => `<span class="tool-tag">${tool}</span>`).join('')}
             </div>
         </div>
-
-        <!-- TRIPLE GRID -->
+    `;
+    
+    // Build triple grid HTML
+    let tripleGridHTML = `
         <div class="visual-grid-triple">
             <div>
                 <div class="grid-item">
-                    <span class="placeholder-text">→ Detail 01</span>
+                    <span class="placeholder-text">${project.images.detail1}</span>
                 </div>
-                <p class="grid-caption">Facade Connection Detail</p>
+                <p class="grid-caption">${project.images.detail1Caption}</p>
             </div>
             <div>
                 <div class="grid-item">
-                    <span class="placeholder-text">→ Detail 02</span>
+                    <span class="placeholder-text">${project.images.detail2}</span>
                 </div>
-                <p class="grid-caption">Foundation System</p>
+                <p class="grid-caption">${project.images.detail2Caption}</p>
             </div>
             <div>
                 <div class="grid-item">
-                    <span class="placeholder-text">→ Render</span>
+                    <span class="placeholder-text">${project.images.detail3}</span>
                 </div>
-                <p class="grid-caption">Exterior Render / Twinmotion</p>
+                <p class="grid-caption">${project.images.detail3Caption}</p>
             </div>
         </div>
-    </div>
-
-    <!-- ============================================
-         PROJECT 2: RESIDENZQUARTIER SCHWABING
-    ============================================ -->
-    <div class="page">
-        <div class="project-header">
-            <div class="project-title-area">
-                <p class="project-type">Residential / Coordination</p>
-                <h2>Residenzquartier Schwabing</h2>
-            </div>
-            <div class="project-meta">
-                <div class="meta-item">
-                    <span class="meta-label">Location</span>
-                    <span class="meta-value">Munich, Germany</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-label">Year</span>
-                    <span class="meta-value">2023-2024</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-label">Value</span>
-                    <span class="meta-value">€12M</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-label">Role</span>
-                    <span class="meta-value">BIM Coordinator</span>
-                </div>
-            </div>
+    `;
+    
+    // Assemble complete content
+    contentDiv.innerHTML = `
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-gray); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 1rem;">${project.category}</p>
+        <h1 style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 300; margin-bottom: 2rem;">${project.title}</h1>
+        <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-gray); margin-bottom: 2rem;">${project.description}</p>
+        
+        <div style="background: var(--off-white); padding: 2rem; border-left: 3px solid var(--accent-green); margin: 3rem 0;">
+            <p style="font-weight: 500; margin-bottom: 0.5rem; color: var(--text-dark);">Connection</p>
+            <p style="color: var(--text-gray); line-height: 1.8;">${project.connection}</p>
         </div>
-
-        <!-- HERO IMAGE -->
-        <div class="visual-grid-hero">
-            <div class="hero-image">
-                <span class="placeholder-text">→ Clash Detection Report / Before & After</span>
-            </div>
+        
+        <div class="project-board">
+            ${metaHTML}
+            ${heroHTML}
+            ${metricsHTML}
+            ${splitGridHTML}
+            ${overviewHTML}
+            ${tripleGridHTML}
         </div>
+    `;
+    
+    detailDiv.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => {
+        detailDiv.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+}
 
-        <!-- TECHNICAL METRICS -->
-        <div class="metrics-section">
-            <div class="metric">
-                <div class="metric-value">340→18</div>
-                <div class="metric-label">Clashes Resolved</div>
-            </div>
-            <div class="metric">
-                <div class="metric-value">3 Weeks</div>
-                <div class="metric-label">Saved in Rework</div>
-            </div>
-            <div class="metric">
-                <div class="metric-value">ISO 19650</div>
-                <div class="metric-label">Compliance</div>
-            </div>
-        </div>
+function closeProject() {
+    const detailDiv = document.getElementById('projectDetail');
+    detailDiv.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
 
-        <!-- SPLIT GRID -->
-        <div class="visual-grid-split">
-            <div>
-                <div class="grid-item">
-                    <span class="placeholder-text">→ Coordination Drawing</span>
-                </div>
-                <p class="grid-caption">MEP Coordination / 3rd Floor</p>
-            </div>
-            <div>
-                <div class="grid-item">
-                    <span class="placeholder-text">→ Navisworks Clash View</span>
-                </div>
-                <p class="grid-caption">Critical Clash Zone / Resolved</p>
-            </div>
-        </div>
-
-        <!-- MINIMAL TEXT -->
-        <div class="text-section">
-            <h3>Coordination Challenge</h3>
-            <p>€12M residential project with complex MEP systems. Initial clash report identified 340 conflicts between architectural, structural, and MEP disciplines. Implemented rigorous BIM coordination workflow following ISO 19650 standards, reducing clashes to 18 before construction phase. Saved approximately 3 weeks of on-site rework and €50,000 in potential delays.</p>
-            
-            <div class="tools-list">
-                <span class="tool-tag">Revit Architecture</span>
-                <span class="tool-tag">Navisworks Manage</span>
-                <span class="tool-tag">BIM 360</span>
-                <span class="tool-tag">ISO 19650</span>
-            </div>
-        </div>
-
-        <!-- TRIPLE GRID -->
-        <div class="visual-grid-triple">
-            <div>
-                <div class="grid-item">
-                    <span class="placeholder-text">→ Floor Plan</span>
-                </div>
-                <p class="grid-caption">Typical Floor / 1:50</p>
-            </div>
-            <div>
-                <div class="grid-item">
-                    <span class="placeholder-text">→ Section</span>
-                </div>
-                <p class="grid-caption">Building Section / 1:50</p>
-            </div>
-            <div>
-                <div class="grid-item">
-                    <span class="placeholder-text">→ 3D View</span>
-                </div>
-                <p class="grid-caption">BIM Model / LOD 350</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============================================
-         PROJECT 3: HEALTHCARE HUB BOGOTÁ
-    ============================================ -->
-    <div class="page">
-        <div class="project-header">
-            <div class="project-title-area">
-                <p class="project-type">Healthcare / MEP Coordination</p>
-                <h2>Healthcare Hub Bogotá</h2>
-            </div>
-            <div class="project-meta">
-                <div class="meta-item">
-                    <span class="meta-label">Location</span>
-                    <span class="meta-value">Bogotá, Colombia</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-label">Year</span>
-                    <span class="meta-value">2023</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-label">Area</span>
-                    <span class="meta-value">4,200m²</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-label">Role</span>
-                    <span class="meta-value">BIM Specialist / MEP Coordination</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- HERO IMAGE -->
-        <div class="visual-grid-hero">
-            <div class="hero-image">
-                <span class="placeholder-text">→ MEP Systems 3D Model / Isolated View</span>
-            </div>
-        </div>
-
-        <!-- TECHNICAL METRICS -->
-        <div class="metrics-section">
-            <div class="metric">
-                <div class="metric-value">25</div>
-                <div class="metric-label">Custom Families</div>
-            </div>
-            <div class="metric">
-                <div class="metric-value">LOD 400</div>
-                <div class="metric-label">Detail Level</div>
-            </div>
-            <div class="metric">
-                <div class="metric-value">100%</div>
-                <div class="metric-label">Code Compliance</div>
-            </div>
-        </div>
-
-        <!-- SPLIT GRID -->
-        <div class="visual-grid-split">
-            <div>
-                <div class="grid-item">
-                    <span class="placeholder-text">→ MEP Plan</span>
-                </div>
-                <p class="grid-caption">HVAC Distribution / Level 2</p>
-            </div>
-            <div>
-                <div class="grid-item">
-                    <span class="placeholder-text">→ Parametric Family</span>
-                </div>
-                <p class="grid-caption">Custom Medical Gas System</p>
-            </div>
-        </div>
-
-        <!-- MINIMAL TEXT -->
-        <div class="text-section">
-            <h3>Technical Approach</h3>
-            <p>Specialized healthcare facility requiring precise MEP coordination for medical gas systems, specialized HVAC, and critical power infrastructure. Developed 25 custom parametric families for healthcare-specific equipment. Achieved LOD 400 for fabrication-ready documentation. Full compliance with Colombian healthcare building codes.</p>
-            
-            <div class="tools-list">
-                <span class="tool-tag">Revit MEP</span>
-                <span class="tool-tag">Navisworks</span>
-                <span class="tool-tag">Family Editor</span>
-                <span class="tool-tag">BIM Collab</span>
-            </div>
-        </div>
-
-        <!-- TRIPLE GRID -->
-        <div class="visual-grid-triple">
-            <div>
-                <div class="grid-item">
-                    <span class="placeholder-text">→ System Diagram</span>
-                </div>
-                <p class="grid-caption">Medical Gas Distribution</p>
-            </div>
-            <div>
-                <div class="grid-item">
-                    <span class="placeholder-text">→ 3D Section</span>
-                </div>
-                <p class="grid-caption">Surgical Suite / MEP Systems</p>
-            </div>
-            <div>
-                <div class="grid-item">
-                    <span class="placeholder-text">→ Coordination</span>
-                </div>
-                <p class="grid-caption">Clash-Free Zone Verification</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============================================
-         CONTACT PAGE
-    ============================================ -->
-    <div class="contact-page">
-        <div class="contact-content">
-            <h2>Let's Connect</h2>
-            <div class="contact-items">
-                <div class="contact-item">
-                    <span>Email:</span>
-                    <a href="/cdn-cgi/l/email-protection#abd2c4ded985cec6cac2c7ebced3cac6dbc7ce85c8c4c6"><span class="__cf_email__" data-cfemail="f38a9c8681dd969e929a9fb3968b929e839f96dd909c9e">[email&#160;protected]</span></a>
-                </div>
-                <div class="contact-item">
-                    <span>LinkedIn:</span>
-                    <a href="#">linkedin.com/in/yourprofile</a>
-                </div>
-                <div class="contact-item">
-                    <span>Location:<
+// Close on ESC key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeProject();
+});
+    </script>
+</body>
+</html>
